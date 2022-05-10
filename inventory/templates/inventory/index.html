@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container my-3">
+    <div class="my-4">
+        <h2>Items:</h2>
+        {% if items %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                <tr>
+                    <th scope="row">{{ item.id }}</th>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.description }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p>No items registered in system.</p>
+        {% endif %}
+        <a class="btn btn-success" href="#" role="button">Add Item</a>
+    </div>
+
+    <div class="my-4">
+        <h2>Shipments:</h2>
+        {% if shipments %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Item</th>
+                    <th scope="col">Quantity</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for shipment in shipments %}
+                <tr>
+                    <th scope="row">{{ shipment.id }}</th>
+                    <td>{{ shipment.item.name }} (#{{ shipment.item.id}})</td>
+                    <td>{{ shipment.quantity }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p>No shipments registered in system.</p>
+        {% endif %}
+        <a class="btn btn-success" href="#" role="button">Add Shipment</a>
+    </div>
+</div>
+
+{% endblock content %}
