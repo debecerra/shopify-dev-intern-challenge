@@ -11,6 +11,7 @@
                     <th scope="col">#</th>
                     <th scope="col">Name</th>
                     <th scope="col">Description</th>
+                    <th scope="col">Details</th>
                 </tr>
             </thead>
             <tbody>
@@ -19,6 +20,11 @@
                     <th scope="row">{{ item.id }}</th>
                     <td>{{ item.name }}</td>
                     <td>{{ item.description }}</td>
+                    <td>
+                        <a class="btn btn-secondary" href="{% url 'inventory:add-item' %}" role="button">
+                            Go to details
+                        </a>
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>
@@ -26,7 +32,7 @@
         {% else %}
         <p>No items registered in system.</p>
         {% endif %}
-        <a class="btn btn-success" href="#" role="button">Add Item</a>
+        <a class="btn btn-success" href="{% url 'inventory:add-item' %}" role="button">Add Item</a>
     </div>
 
     <div class="my-4">
@@ -37,7 +43,9 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Item</th>
+                    <th scope="col">Date</th>
                     <th scope="col">Quantity</th>
+                    <th scope="col">Details</th>
                 </tr>
             </thead>
             <tbody>
@@ -45,7 +53,13 @@
                 <tr>
                     <th scope="row">{{ shipment.id }}</th>
                     <td>{{ shipment.item.name }} (#{{ shipment.item.id}})</td>
+                    <td>{{ shipment.date }}</td>
                     <td>{{ shipment.quantity }}</td>
+                    <td>
+                        <a class="btn btn-secondary" href="{% url 'inventory:add-item' %}" role="button">
+                            Go to details
+                        </a>
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>
@@ -53,7 +67,7 @@
         {% else %}
         <p>No shipments registered in system.</p>
         {% endif %}
-        <a class="btn btn-success" href="#" role="button">Add Shipment</a>
+        <a class="btn btn-success" href="{% url 'inventory:add-shipment' %}" role="button">Add Shipment</a>
     </div>
 </div>
 

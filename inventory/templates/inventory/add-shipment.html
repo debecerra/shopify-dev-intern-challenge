@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container my-3">
+    <h2>Add a new shipment: </h2>
+    <form action="{% url 'inventory:add-shipment' %}" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input class="btn btn-success my-3 mr-3" type="submit" value="Add Shipment">
+        <a class="btn btn-secondary m-3" href="{% url 'inventory:index' %}" role="button">Return to Menu</a>
+    </form>
+</div>
+
+{% endblock content %}
