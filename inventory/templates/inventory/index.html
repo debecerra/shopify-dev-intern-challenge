@@ -8,23 +8,21 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col">#</th>
+                    <th scope="col">ID</th>
                     <th scope="col">Name</th>
                     <th scope="col">Description</th>
-                    <th scope="col">Details</th>
                 </tr>
             </thead>
             <tbody>
                 {% for entry in catalog %}
                 <tr>
-                    <th scope="row">{{ entry.id }}</th>
+                    <th scope="row">
+                        <a href="{% url 'inventory:catalog-entry' entry.id %}">
+                            {{ entry.id }}
+                        </a>
+                    </th>
                     <td>{{ entry.name }}</td>
                     <td>{{ entry.description }}</td>
-                    <td>
-                        <a class="btn btn-secondary" href="{% url 'inventory:catalog-entry' entry.id %}" role="button">
-                            Go to details
-                        </a>
-                    </td>
                 </tr>
                 {% endfor %}
             </tbody>
@@ -41,25 +39,23 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col">#</th>
+                    <th scope="col">ID</th>
                     <th scope="col">Item</th>
-                    <th scope="col">Date</th>
                     <th scope="col">Quantity</th>
-                    <th scope="col">Details</th>
+                    <th scope="col">Warehouse</th>
                 </tr>
             </thead>
             <tbody>
                 {% for item in inventory %}
                 <tr>
-                    <th scope="row">{{ item.id }}</th>
-                    <td>{{ item.entry.name }} (#{{ item.entry.id}})</td>
-                    <td>{{ item.date }}</td>
-                    <td>{{ item.quantity }}</td>
-                    <td>
-                        <a class="btn btn-secondary" href="{% url 'inventory:item' item.id %}" role="button">
-                            Go to details
+                    <th scope="row">
+                        <a href="{% url 'inventory:item' item.id %}">
+                            {{ item.id }}
                         </a>
-                    </td>
+                    </th>
+                    <td>{{ item.entry }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>{{ item.warehouse }}</td>
                 </tr>
                 {% endfor %}
             </tbody>
@@ -68,6 +64,39 @@
         <p>No inventory items to display.</p>
         {% endif %}
         <a class="btn btn-success" href="{% url 'inventory:add-item' %}" role="button">Add Inventory Item</a>
+    </div>
+
+    <div class="my-4">
+        <h2>Warehouses:</h2>
+        {% if warehouses %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">City</th>
+                    <th scope="col">Country</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for warehouse in warehouses %}
+                <tr>
+                    <th scope="row">
+                        <a href="{% url 'inventory:warehouse' warehouse.id %}">
+                            {{ warehouse.id }}
+                        </a>
+                    </th>
+                    <td>{{ warehouse.address }}</td>
+                    <td>{{ warehouse.city.name }}</td>
+                    <td>{{ warehouse.city.country.name }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p>No warehouses to display.</p>
+        {% endif %}
+        <a class="btn btn-success" href="{% url 'inventory:add-warehouse' %}" role="button">Add Warehouse</a>
     </div>
 </div>
 

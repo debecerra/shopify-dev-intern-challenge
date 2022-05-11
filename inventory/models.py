@@ -9,7 +9,7 @@ class CatalogEntry(models.Model):
     description = models.CharField(max_length=200, blank=True)
 
     def __str__(self):
-        return self.name
+        return f'{self.name} (C{self.id})'
 
 
 class Country(models.Model):
@@ -37,10 +37,11 @@ class Warehouse(models.Model):
     """ Represents a warehouse that holds inventory items.
     """
 
+    address = models.CharField(max_length=100)
     city = models.ForeignKey(City, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'{self.city}:{self.id}'
+        return f'{self.city} (W{self.id})'
 
 
 class InventoryItem(models.Model):

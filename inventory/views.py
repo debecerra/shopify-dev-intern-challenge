@@ -3,8 +3,8 @@ from django.views import View
 from django.db import models
 from django.contrib import messages
 
-from .models import CatalogEntry, InventoryItem
-from .forms import CatalogEntryForm, InventoryItemForm
+from .models import CatalogEntry, InventoryItem, Warehouse
+from .forms import CatalogEntryForm, InventoryItemForm, WarehouseForm
 
 
 class IndexView(View):
@@ -19,7 +19,8 @@ class IndexView(View):
 
         context = {
             'catalog': CatalogEntry.objects.all(),
-            'inventory': InventoryItem.objects.all()
+            'inventory': InventoryItem.objects.all(),
+            'warehouses': Warehouse.objects.all(),
         }
         return render(request, 'inventory/index.html', context)
 
@@ -135,8 +136,8 @@ class AddInventoryItemView(View):
         if form.is_valid():
             InventoryItem.objects.create(
                 entry=form.cleaned_data.get('entry'),
-                date=form.cleaned_data.get('date'),
                 quantity=form.cleaned_data.get('quantity'),
+                warehouse=form.cleaned_data.get('warehouse'),
             )
             return redirect('inventory:index')
 
@@ -153,10 +154,10 @@ class InventoryItemView(View):
         """
 
         # get inventory item and prepopulate form fields with inventory item
-        shipment = get_object_or_404(InventoryItem, id=id)
+        item = get_object_or_404(InventoryItem, id=id)
         context = {
-            'item': shipment,
-            'form': InventoryItemForm(instance=shipment)
+            'item': item,
+            'form': InventoryItemForm(instance=item)
         }
         return render(request, 'inventory/inventory-item.html', context)
 
@@ -174,8 +175,8 @@ class InventoryItemView(View):
             if request.POST.get('action') == 'Update':
                 # update the existing inventory item
                 item.entry = form.cleaned_data.get('entry')
-                item.date = form.cleaned_data.get('date')
                 item.quantity = form.cleaned_data.get('quantity')
+                item.warehouse = form.cleaned_data.get('warehouse')
                 item.save()
 
                 messages.success(
@@ -199,3 +200,97 @@ class InventoryItemView(View):
 
         else:
             return redirect('inventory:item', id)
+
+
+class AddWarehouseView(View):
+    def get(self, request):
+        """ Displays form for creating a new warehouse.
+
+        @param request: the HTTP request received by the server
+        """
+
+        context = {
+            'form': WarehouseForm()
+        }
+
+        return render(request, 'inventory/add-warehouse.html', context)
+
+    def post(self, request):
+        """ Creates a new warehouse.
+
+        @param request: the HTTP request received by the server
+        """
+
+        form = WarehouseForm(request.POST)
+        if form.is_valid():
+            Warehouse.objects.create(
+                address=form.cleaned_data.get('address'),
+                city=form.cleaned_data.get('city'),
+            )
+            return redirect('inventory:index')
+        else:
+            return redirect('inventory:add-warehouse')
+
+
+class WarehouseView(View):
+    def get(self, request, id):
+        """ Displays single warehouse with the option to edit or delete the warehosue.
+
+        @param request: the HTTP request received by the server
+        @param id: the id of the inventory item
+        """
+
+        # get inventory item and prepopulate form fields with inventory item
+        warehouse = get_object_or_404(Warehouse, id=id)
+        context = {
+            'warehouse': warehouse,
+            'form': WarehouseForm(instance=warehouse)
+        }
+        return render(request, 'inventory/warehouse.html', context)
+
+    def post(self, request, id):
+        """ Updates or deletes an existing warehouse.
+
+        @param request: the HTTP request received by the server
+        @param id: the id of the warehouse
+        """
+
+        form = WarehouseForm(request.POST)
+        if form.is_valid():
+            warehouse = get_object_or_404(Warehouse, id=id)
+
+            if request.POST.get('action') == 'Update':
+                # update the existing warehouse
+                warehouse.address = form.cleaned_data.get('address')
+                warehouse.city = form.cleaned_data.get('city')
+                warehouse.save()
+
+                messages.success(
+                    request,
+                    'Warehouse updated successfully'
+                )
+                return redirect('inventory:warehouse', id)
+
+            elif request.POST.get('action') == 'Delete':
+                # delete the existing catalog entry
+                try:
+                    warehouse.delete()
+                    messages.success(
+                        request,
+                        'Warehouse successfully deleted'
+                    )
+                    return redirect('inventory:index')
+                except models.ProtectedError:
+                    # if fail to delete, give error message and redirect to same page
+                    messages.error(
+                        request,
+                        'Cannot delete warehouse: Inventory is currently stored here'
+                    )
+                    return redirect('inventory:warehouse', id)
+
+            else:
+                # unknown request
+                return redirect('inventory:warehouse', id)
+
+        else:
+            return redirect('inventory:warehouse', id)

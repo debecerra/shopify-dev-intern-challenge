@@ -3,11 +3,11 @@
 {% block content %}
 
 <div class="container my-3">
-    <h2>Add a New Inventory Item: </h2>
-    <form action="{% url 'inventory:add-item' %}" method="post">
+    <h2>Add a New Warehouse: </h2>
+    <form action="{% url 'inventory:add-warehouse' %}" method="post">
         {% csrf_token %}
         {{ form }}
-        <input class="btn btn-success my-3" type="submit" value="Add Item">
+        <input class="btn btn-success my-3" type="submit" value="Add Warehouse">
         <a class="btn btn-secondary ml-1" href="{% url 'inventory:index' %}" role="button">Return to Menu</a>
     </form>
 </div>
