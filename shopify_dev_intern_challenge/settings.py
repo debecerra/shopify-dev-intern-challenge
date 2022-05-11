@@ -25,8 +25,15 @@ SECRET_KEY = config('SECRET_KEY', default='django-insecure-i@28z%7&syw-rp3@m0+#@
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+  '427ad3f4-1996-4ebf-8ce8-e3d53820e7b7.id.repl.co',
+  'shopify-dev-intern-challenge.debecerra.repl.co'
+]
 
+CSRF_TRUSTED_ORIGINS = [
+  'https://427ad3f4-1996-4ebf-8ce8-e3d53820e7b7.id.repl.co',
+  'https://shopify-dev-intern-challenge.debecerra.repl.co'
+]
 
 # Application definition
 
@@ -132,3 +139,5 @@ MESSAGE_TAGS = {
     messages.WARNING: 'alert-warning',
     messages.ERROR: 'alert-danger',
 }
+
+X_FRAME_OPTIONS = '*'
