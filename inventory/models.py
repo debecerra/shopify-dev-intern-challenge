@@ -34,7 +34,7 @@ class City(models.Model):
     date_modified = models.DateTimeField(auto_now=True)
 
     def outdated(self):
-        threshold = timezone.now() - datetime.timedelta(minutes=1)
+        threshold = timezone.now() - datetime.timedelta(minutes=5)
         return self.date_modified < threshold
 
     def __str__(self):
