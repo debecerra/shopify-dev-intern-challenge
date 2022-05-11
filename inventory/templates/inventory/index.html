@@ -43,6 +43,7 @@
                     <th scope="col">Item</th>
                     <th scope="col">Quantity</th>
                     <th scope="col">Warehouse</th>
+                    <th scope="col">Weather</th>
                 </tr>
             </thead>
             <tbody>
@@ -56,6 +57,7 @@
                     <td>{{ item.entry }}</td>
                     <td>{{ item.quantity }}</td>
                     <td>{{ item.warehouse }}</td>
+                    <td>{{ item.warehouse.city.temp }}°C with {{ item.warehouse.city.weather }}</td>
                 </tr>
                 {% endfor %}
             </tbody>
@@ -76,6 +78,7 @@
                     <th scope="col">Address</th>
                     <th scope="col">City</th>
                     <th scope="col">Country</th>
+                    <th scope="col">Weather</th>
                 </tr>
             </thead>
             <tbody>
@@ -89,6 +92,7 @@
                     <td>{{ warehouse.address }}</td>
                     <td>{{ warehouse.city.name }}</td>
                     <td>{{ warehouse.city.country.name }}</td>
+                    <td>{{ warehouse.city.temp }}°C with {{ warehouse.city.weather }}</td>
                 </tr>
                 {% endfor %}
             </tbody>

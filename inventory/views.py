@@ -6,6 +6,8 @@ from django.contrib import messages
 from .models import CatalogEntry, InventoryItem, Warehouse
 from .forms import CatalogEntryForm, InventoryItemForm, WarehouseForm
 
+from inventory.api.weather import OpenWeatherAPI
+
 
 class IndexView(View):
     """ View to display on index of Inventory application
@@ -242,6 +244,13 @@ class WarehouseView(View):
 
         # get inventory item and prepopulate form fields with inventory item
         warehouse = get_object_or_404(Warehouse, id=id)
+        city = warehouse.city
+        api = OpenWeatherAPI()
+        temp, weather = api.get_weather(city.name, city.country.name)
+        city.temp = temp
+        city.weather = weather
+        city.save()
+
         context = {
             'warehouse': warehouse,
             'form': WarehouseForm(instance=warehouse)
