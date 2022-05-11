@@ -21,7 +21,7 @@
                     <td>{{ item.name }}</td>
                     <td>{{ item.description }}</td>
                     <td>
-                        <a class="btn btn-secondary" href="{% url 'inventory:add-item' %}" role="button">
+                        <a class="btn btn-secondary" href="{% url 'inventory:item' item.id %}" role="button">
                             Go to details
                         </a>
                     </td>
@@ -56,7 +56,7 @@
                     <td>{{ shipment.date }}</td>
                     <td>{{ shipment.quantity }}</td>
                     <td>
-                        <a class="btn btn-secondary" href="{% url 'inventory:add-item' %}" role="button">
+                        <a class="btn btn-secondary" href="{% url 'inventory:shipment' shipment.id %}" role="button">
                             Go to details
                         </a>
                     </td>

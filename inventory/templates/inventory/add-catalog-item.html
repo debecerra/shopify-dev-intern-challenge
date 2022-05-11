@@ -7,8 +7,8 @@
     <form action="{% url 'inventory:add-item' %}" method="post">
         {% csrf_token %}
         {{ form }}
-        <input class="btn btn-success my-3 mr-3" type="submit" value="Add Item">
-        <a class="btn btn-secondary m-3" href="{% url 'inventory:index' %}" role="button">Return to Menu</a>
+        <input class="btn btn-success my-3" type="submit" value="Add Item">
+        <a class="btn btn-secondary ml-1" href="{% url 'inventory:index' %}" role="button">Return to Menu</a>
     </form>
 </div>
 

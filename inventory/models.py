@@ -1,8 +1,8 @@
 from django.db import models
 
 
-class Item(models.Model):
-    """ Represents an inventory item.
+class CatalogItem(models.Model):
+    """ Represents an inventory item in a catalog.
     """
 
     name = models.CharField(max_length=100)
@@ -16,7 +16,7 @@ class Shipment(models.Model):
     """ Represents a time specific shipment of an inventory item.
     """
 
-    item = models.ForeignKey(Item, on_delete=models.PROTECT)
+    item = models.ForeignKey(CatalogItem, on_delete=models.PROTECT)
     date = models.DateField()
     quantity = models.IntegerField()
 
