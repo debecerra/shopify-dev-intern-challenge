@@ -31,3 +31,9 @@ This web application allows for basic CRUD functionality. Users can create inven
 This application was build with maintainability and extensibility in mind. The application design, data representation and user interface was designed in a way that easily allows for the addition of new features in the future. The Django ORM helps us enforce data and relational integrity for inventory items, catalog entries and warehouses. Each of these objects is represented as distinct objects in the code, making it easy to add new attributes or define new object types to keep track of new data (e.g. shipments). One design choice that I made is that catalog entries and warehouses cannot be deleted if they are referenced by a inventory item. For example, all inventory items in a warehouse must be moved or deleted before a warehouse can be deleted from the system.
 
 This project interacts with the Open Weather API to obtain current weather data for the cities in which warehouses are located. This weather information is displayed alongside the warehouse and inventory lists. 
+
+# Deployment
+
+I was not able to get the app running on Replit. According to several discussion posts (https://replit.com/talk/ask/Why-is-my-run-button-is-not-working-properly/111814), this appears to be a bug with Replit. After many hours I was able to run the project using the shell but was not able to find a way to deploy the application persistently. However, the project can be found at this Replit link https://replit.com/@debecerra/shopify-dev-intern-challenge. In the Replit development environment, clicking the "Run" button simply does not do anything and does not print anything to the console, installing packages such as Django fail with no error message printed to the console, etc.
+
+Since I was unable to deploy using Replit, I deployed the app on Heroku at the following link https://inventory-app-debecerra.herokuapp.com/.
