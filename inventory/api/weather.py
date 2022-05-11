@@ -8,7 +8,7 @@ class OpenWeatherAPI:
 
     base = 'https://api.openweathermap.org/data/2.5/weather'
     params = {
-        'appid': config('OPENWEATHER_API_KEY'),  # defined in .env
+        'appid': config('OPENWEATHER_API_KEY', default='61fd1744a36ed1c16f63cd7514cfebb6'),  # defined in .env
         'units': 'metric'
     }
 
