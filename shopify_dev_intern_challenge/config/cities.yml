@@ -1,0 +1,11 @@
+cities:
+- name: Edmonton
+  country: Canada
+- name: Calgary
+  country: Canada
+- name: Toronto
+  country: Canada
+- name: Seattle
+  country: United States
+- name: London
+  country: UK
