@@ -1,5 +1,6 @@
 from django.db import models
-
+from django.utils import timezone
+import datetime
 
 class CatalogEntry(models.Model):
     """ Represents an inventory item in a catalog.
@@ -30,6 +31,11 @@ class City(models.Model):
     country = models.ForeignKey(Country, on_delete=models.CASCADE)
     temp = models.DecimalField(decimal_places=1, max_digits=4, default=0.0)
     weather = models.CharField(max_length=50, default="no weather info to display")
+    date_modified = models.DateTimeField(auto_now=True)
+
+    def outdated(self):
+        threshold = timezone.now() - datetime.timedelta(minutes=1)
+        return self.date_modified < threshold
 
     def __str__(self):
         return f'{self.name}, {self.country.name}'

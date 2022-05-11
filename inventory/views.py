@@ -229,6 +229,15 @@ class AddWarehouseView(View):
                 address=form.cleaned_data.get('address'),
                 city=form.cleaned_data.get('city'),
             )
+
+            city = form.cleaned_data.get('city')
+            if city.outdated():
+                api = OpenWeatherAPI()
+                temp, weather = api.get_weather(city.name, city.country.name)
+                city.temp = temp
+                city.weather = weather
+                city.save()
+
             return redirect('inventory:index')
         else:
             return redirect('inventory:add-warehouse')
@@ -236,7 +245,7 @@ class AddWarehouseView(View):
 
 class WarehouseView(View):
     def get(self, request, id):
-        """ Displays single warehouse with the option to edit or delete the warehosue.
+        """ Displays single warehouse with the option to edit or delete the warehouse.
 
         @param request: the HTTP request received by the server
         @param id: the id of the inventory item
@@ -245,11 +254,12 @@ class WarehouseView(View):
         # get inventory item and prepopulate form fields with inventory item
         warehouse = get_object_or_404(Warehouse, id=id)
         city = warehouse.city
-        api = OpenWeatherAPI()
-        temp, weather = api.get_weather(city.name, city.country.name)
-        city.temp = temp
-        city.weather = weather
-        city.save()
+        if city.outdated():
+            api = OpenWeatherAPI()
+            temp, weather = api.get_weather(city.name, city.country.name)
+            city.temp = temp
+            city.weather = weather
+            city.save()
 
         context = {
             'warehouse': warehouse,
