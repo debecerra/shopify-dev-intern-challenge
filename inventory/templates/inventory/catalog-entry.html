@@ -3,8 +3,8 @@
 {% block content %}
 
 <div class="container my-3">
-    <h2>Edit Existing Shipment: </h2>
-    <form action="{% url 'inventory:shipment' item.id %}" method="post">
+    <h2>Edit Existing Catalog Entry: </h2>
+    <form action="{% url 'inventory:catalog-entry' item.id %}" method="post">
         {% csrf_token %}
         {{ form }}
         <input class="btn btn-success my-3" type="submit" name="action" value="Update">

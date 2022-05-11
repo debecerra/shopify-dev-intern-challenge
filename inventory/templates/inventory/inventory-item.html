@@ -3,7 +3,7 @@
 {% block content %}
 
 <div class="container my-3">
-    <h2>Edit Existing Catalog Item: </h2>
+    <h2>Edit Existing Inventory Item: </h2>
     <form action="{% url 'inventory:item' item.id %}" method="post">
         {% csrf_token %}
         {{ form }}

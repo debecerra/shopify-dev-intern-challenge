@@ -3,8 +3,8 @@
 {% block content %}
 <div class="container my-3">
     <div class="my-4">
-        <h2>Items:</h2>
-        {% if items %}
+        <h2>Catalog:</h2>
+        {% if catalog %}
         <table class="table">
             <thead>
                 <tr>
@@ -15,13 +15,13 @@
                 </tr>
             </thead>
             <tbody>
-                {% for item in items %}
+                {% for entry in catalog %}
                 <tr>
-                    <th scope="row">{{ item.id }}</th>
-                    <td>{{ item.name }}</td>
-                    <td>{{ item.description }}</td>
+                    <th scope="row">{{ entry.id }}</th>
+                    <td>{{ entry.name }}</td>
+                    <td>{{ entry.description }}</td>
                     <td>
-                        <a class="btn btn-secondary" href="{% url 'inventory:item' item.id %}" role="button">
+                        <a class="btn btn-secondary" href="{% url 'inventory:catalog-entry' entry.id %}" role="button">
                             Go to details
                         </a>
                     </td>
@@ -30,14 +30,14 @@
             </tbody>
         </table>
         {% else %}
-        <p>No items registered in system.</p>
+        <p>No catalog entries to display.</p>
         {% endif %}
-        <a class="btn btn-success" href="{% url 'inventory:add-item' %}" role="button">Add Item</a>
+        <a class="btn btn-success" href="{% url 'inventory:add-catalog-entry' %}" role="button">Add Catalog Entry</a>
     </div>
 
     <div class="my-4">
-        <h2>Shipments:</h2>
-        {% if shipments %}
+        <h2>Inventory Items:</h2>
+        {% if inventory %}
         <table class="table">
             <thead>
                 <tr>
@@ -49,14 +49,14 @@
                 </tr>
             </thead>
             <tbody>
-                {% for shipment in shipments %}
+                {% for item in inventory %}
                 <tr>
-                    <th scope="row">{{ shipment.id }}</th>
-                    <td>{{ shipment.item.name }} (#{{ shipment.item.id}})</td>
-                    <td>{{ shipment.date }}</td>
-                    <td>{{ shipment.quantity }}</td>
+                    <th scope="row">{{ item.id }}</th>
+                    <td>{{ item.entry.name }} (#{{ item.entry.id}})</td>
+                    <td>{{ item.date }}</td>
+                    <td>{{ item.quantity }}</td>
                     <td>
-                        <a class="btn btn-secondary" href="{% url 'inventory:shipment' shipment.id %}" role="button">
+                        <a class="btn btn-secondary" href="{% url 'inventory:item' item.id %}" role="button">
                             Go to details
                         </a>
                     </td>
@@ -65,9 +65,9 @@
             </tbody>
         </table>
         {% else %}
-        <p>No shipments registered in system.</p>
+        <p>No inventory items to display.</p>
         {% endif %}
-        <a class="btn btn-success" href="{% url 'inventory:add-shipment' %}" role="button">Add Shipment</a>
+        <a class="btn btn-success" href="{% url 'inventory:add-item' %}" role="button">Add Inventory Item</a>
     </div>
 </div>
 
