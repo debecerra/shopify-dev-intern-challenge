@@ -1,1 +1,1 @@
-web: gunicorn myproject.wsgi
+web: gunicorn shopify_dev_intern_challenge.wsgi
