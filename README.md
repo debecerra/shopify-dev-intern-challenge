@@ -8,6 +8,8 @@ This repository contains an inventory tracking web application for a logistics c
 
 This project meets all requirements for the Shopify Developer Intern Challenge while also having a few extra features to also meet the requirements for the Shopify Production Engineer Intern Challenge.
 
+[Deployment](https://inventory-app-debecerra.herokuapp.com/)
+
 ## Building and Running Locally
 
 This project requires Python 3. Specifically, Python 3.9 was used in development but other versions should work fine as well. It is recommended to use a virtual environment (e.g. venv) to set up dependencies.
@@ -34,6 +36,6 @@ This project interacts with the Open Weather API to obtain current weather data 
 
 # Deployment
 
-I was not able to get the app running on Replit. According to several discussion posts (https://replit.com/talk/ask/Why-is-my-run-button-is-not-working-properly/111814), this appears to be a bug with Replit. After many hours I was able to run the project using the shell but was not able to find a way to deploy the application persistently. However, the project can be found at this Replit link https://replit.com/@debecerra/shopify-dev-intern-challenge. In the Replit development environment, clicking the "Run" button simply does not do anything and does not print anything to the console, installing packages such as Django fail with no error message printed to the console, etc.
+I was not able to deploy the app using Replit. According to several discussion posts (https://replit.com/talk/ask/Why-is-my-run-button-is-not-working-properly/111814), this appears to be a bug with Replit where the "Run" button does not work. I was able to run the project using the shell but was not able to find a way to deploy the application persistently. However, the project can be found at this Replit link https://replit.com/@debecerra/shopify-dev-intern-challenge. In the Replit development environment, clicking the "Run" button simply does not do anything and does not print anything to the console, installing packages such as Django fail with no error message printed to the console, etc.
 
 Since I was unable to deploy using Replit, I deployed the app on Heroku at the following link https://inventory-app-debecerra.herokuapp.com/.
