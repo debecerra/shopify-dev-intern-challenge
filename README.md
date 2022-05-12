@@ -10,7 +10,7 @@ This project meets all requirements for the Shopify Developer Intern Challenge w
 
 ## Deployment
 
-[Replit](https://replit.com/@debecerra/shopify-dev-intern-challenge)
+[Replit](https://replit.com/@debecerra/shopify-dev-intern-challenge) (Note: To import to Replit project, you will need to delete the `requirements.txt` file and possibly need to manually install some packages using the sidebar since Replit does not natively use pip package manager)
 
 [Replit Deployment](https://shopify-dev-intern-challenge.debecerra.repl.co/)
 
