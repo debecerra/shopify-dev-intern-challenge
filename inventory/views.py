@@ -3,7 +3,7 @@ from django.views import View
 from django.db import models
 from django.contrib import messages
 
-from .models import CatalogEntry, InventoryItem, Warehouse
+from .models import CatalogEntry, InventoryItem, Warehouse, City
 from .forms import CatalogEntryForm, InventoryItemForm, WarehouseForm
 
 from inventory.api.weather import OpenWeatherAPI
@@ -19,6 +19,16 @@ class IndexView(View):
         @param request: the HTTP request received by the server
         """
 
+        # update weather info for cities
+        api = OpenWeatherAPI()
+        for city in City.objects.all():
+            if city.outdated():
+                temp, weather = api.get_weather(city.name, city.country.name)
+                city.temp = temp
+                city.weather = weather
+                city.save()
+
+        # display all items
         context = {
             'catalog': CatalogEntry.objects.all(),
             'inventory': InventoryItem.objects.all(),
