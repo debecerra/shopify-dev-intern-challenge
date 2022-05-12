@@ -18,11 +18,11 @@ This project meets all requirements for the Shopify Developer Intern Challenge w
 
 ## Building and Running Locally
 
-This project requires Python 3. Specifically, Python 3.9 was used in development but other versions should work fine as well. It is recommended to use a virtual environment (e.g. venv) to set up dependencies.
+This project requires [Python 3](https://www.python.org/downloads/). Specifically, Python 3.9 was used in development but other versions should work fine as well. It is recommended to use a virtual environment (e.g. venv) to set up dependencies.
 
 ```bash
 # Set up and activate virtual environment
-python -m venv venv
+python3 -m venv venv
 source venv/bin/activate
 
 # Install dependencies

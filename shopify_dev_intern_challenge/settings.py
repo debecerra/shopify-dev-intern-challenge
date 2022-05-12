@@ -26,12 +26,12 @@ SECRET_KEY = config('SECRET_KEY', default='django-insecure-i@28z%7&syw-rp3@m0+#@
 DEBUG = True
 
 ALLOWED_HOSTS = [
-  '427ad3f4-1996-4ebf-8ce8-e3d53820e7b7.id.repl.co',
+  'fb2ae9a6-7fdd-4a54-86e0-6575dfd3a45d.id.repl.co',
   'shopify-dev-intern-challenge.debecerra.repl.co'
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-  'https://427ad3f4-1996-4ebf-8ce8-e3d53820e7b7.id.repl.co',
+  'https://fb2ae9a6-7fdd-4a54-86e0-6575dfd3a45d.id.repl.co',
   'https://shopify-dev-intern-challenge.debecerra.repl.co'
 ]
 
